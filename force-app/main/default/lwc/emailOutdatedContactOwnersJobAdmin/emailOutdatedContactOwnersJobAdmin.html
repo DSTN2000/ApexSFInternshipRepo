@@ -1,0 +1,45 @@
+<template>
+    <lightning-card title="Outdated Contact Email Job">
+        <div class="slds-var-p-around_medium">
+
+            <!-- Job status -->
+            <template lwc:if={jobStatus}>
+                <p><strong>Status:</strong> {jobStatus.state}</p>
+                <p><strong>Cron:</strong> {jobStatus.cronExpression}</p>
+                <p><strong>Next run:</strong> {jobStatus.nextFireTime}</p>
+            </template>
+            <template lwc:else>
+                <p>Job is not scheduled.</p>
+            </template>
+
+            <div class="slds-var-m-top_medium">
+                <lightning-input
+                    label="Cron expression"
+                    placeholder="0 0 8 * * ?"
+                    value={cronExpression}
+                    onchange={handleCronChange}
+                ></lightning-input>
+            </div>
+
+            <div class="slds-var-m-top_medium slds-button-group">
+                <lightning-button
+                    label="Schedule"
+                    variant="brand"
+                    onclick={handleSchedule}
+                    disabled={isScheduleDisabled}
+                ></lightning-button>
+                <lightning-button
+                    label="Unschedule"
+                    variant="destructive"
+                    onclick={handleUnschedule}
+                    disabled={isUnscheduleDisabled}
+                ></lightning-button>
+            </div>
+
+            <template lwc:if={errorMessage}>
+                <p class="slds-var-m-top_small slds-text-color_error">{errorMessage}</p>
+            </template>
+
+        </div>
+    </lightning-card>
+</template>
