@@ -33,6 +33,15 @@ public with sharing class EmailOutdatedContactOwnersJobController {
         abortExistingJob();
     }
 
+    @AuraEnabled
+    public static void sendNow() {
+        Map<Id, List<Contact>> ownerToContacts = ContactUtils.getOutdatedOwners();
+        List<Messaging.SingleEmailMessage> emails = EmailUtils.buildOutdatedContactsEmails(ownerToContacts);
+        if (!emails.isEmpty()) {
+            Messaging.sendEmail(emails, false);
+        }
+    }
+
     private static void abortExistingJob() {
         List<CronTrigger> jobs = [
             SELECT Id FROM CronTrigger

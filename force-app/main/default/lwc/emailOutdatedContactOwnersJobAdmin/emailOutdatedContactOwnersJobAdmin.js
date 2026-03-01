@@ -3,6 +3,9 @@ import getJobStatus from '@salesforce/apex/EmailOutdatedContactOwnersJobControll
 import scheduleJob from '@salesforce/apex/EmailOutdatedContactOwnersJobController.scheduleJob';
 import unscheduleJob from '@salesforce/apex/EmailOutdatedContactOwnersJobController.unscheduleJob';
 
+import sendNow from '@salesforce/apex/EmailOutdatedContactOwnersJobController.sendNow';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+
 export default class EmailOutdatedContactOwnersJobAdmin extends LightningElement {
     @track jobStatus = null;
     @track cronExpression = '';
@@ -42,6 +45,20 @@ export default class EmailOutdatedContactOwnersJobAdmin extends LightningElement
             })
             .catch(error => {
                 this.errorMessage = error?.body?.message ?? 'Failed to unschedule job.';
+            });
+    }
+
+    handleSendNow() {
+        sendNow()
+            .then(() => {
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title: 'Success',
+                        message: 'Email sent successfully.',
+                        variant: 'success'}));
+            })
+            .catch(error => {
+                this.errorMessage = error?.body?.message ?? 'Failed to send email.';
             });
     }
 

@@ -21,19 +21,28 @@
                 ></lightning-input>
             </div>
 
-            <div class="slds-var-m-top_medium slds-button-group">
-                <lightning-button
-                    label="Schedule"
-                    variant="brand"
-                    onclick={handleSchedule}
-                    disabled={isScheduleDisabled}
-                ></lightning-button>
-                <lightning-button
-                    label="Unschedule"
-                    variant="destructive"
-                    onclick={handleUnschedule}
-                    disabled={isUnscheduleDisabled}
-                ></lightning-button>
+            <div class="slds-var-m-top_medium slds-grid">
+                <div class="slds-button-group">
+                    <lightning-button
+                        label="Schedule"
+                        variant="brand"
+                        onclick={handleSchedule}
+                        disabled={isScheduleDisabled}
+                    ></lightning-button>
+                    <lightning-button
+                        label="Unschedule"
+                        variant="destructive"
+                        onclick={handleUnschedule}
+                        disabled={isUnscheduleDisabled}
+                    ></lightning-button>
+                </div>
+                <div class="slds-col_bump-left">
+                    <lightning-button
+                        label="Send Now"
+                        variant="brand"
+                        onclick={handleSendNow}
+                    ></lightning-button>
+                </div>
             </div>
 
             <template lwc:if={errorMessage}>
