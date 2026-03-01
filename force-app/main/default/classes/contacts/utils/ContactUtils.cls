@@ -6,7 +6,7 @@ public with sharing class ContactUtils {
         }
         
         Map<Id, List<Contact>> userToOutdatedContacts = new Map<Id, List<Contact>>();
-        for (Contact c : [SELECT Id, FirstName, LastName, AccountId, OwnerId, Possible_Outdated__c 
+        for (Contact c : [SELECT Id, Name, AccountId, OwnerId, Possible_Outdated__c 
                       FROM Contact 
                       WHERE OwnerId IN :activeUserIds]) {
             if (c.Possible_Outdated__c == true) {
