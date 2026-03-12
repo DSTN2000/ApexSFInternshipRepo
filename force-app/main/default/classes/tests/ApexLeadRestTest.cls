@@ -1,9 +1,6 @@
 @isTest
 private class ApexLeadRestTest {
 
-    /**
-     * Inserts shared Lead test data used across all test methods.
-     */
     @TestSetup
     static void makeData() {
         List<Lead> leads = new List<Lead>{
@@ -23,13 +20,6 @@ private class ApexLeadRestTest {
         insert leads;
     }
 
-    /**
-     * Builds a RestRequest and wires it into RestContext.
-     *
-     * @param method HTTP method (GET, POST, etc.)
-     * @param uri    Request URI
-     * @param body   Request body JSON, or null
-     */
     private static void setRequest(String method, String uri, String body) {
         RestRequest req  = new RestRequest();
         req.httpMethod   = method;
@@ -41,12 +31,10 @@ private class ApexLeadRestTest {
         RestContext.response = new RestResponse();
     }
 
-    /** @return Alice's Lead record. */
     private static Lead getAlice() {
         return [SELECT Id, FirstName, LastName, Email FROM Lead WHERE Email = 'alice@example.com' LIMIT 1];
     }
 
-    /** @return Bob's Lead record. */
     private static Lead getBob() {
         return [SELECT Id, FirstName, LastName, Email FROM Lead WHERE Email = 'bob@example.com' LIMIT 1];
     }

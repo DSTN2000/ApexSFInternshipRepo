@@ -5,5 +5,15 @@
     "**/.sf": true,
     "**/.sfdx": true
   },
-  "xml.preferences.showSchemaDocumentationType": "none"
+  "xml.preferences.showSchemaDocumentationType": "none",
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    "*.cls": "${capture}.cls-meta.xml",
+    "*.trigger": "${capture}.trigger-meta.xml",
+    "*.page": "${capture}.page-meta.xml",
+    "*.component": "${capture}.component-meta.xml",
+    "*.js": "${capture}.html, ${capture}.css, ${capture}.js-meta.xml, ${capture}.svg",
+    "*.object": "${capture}.object-meta.xml"
+  }
 }
