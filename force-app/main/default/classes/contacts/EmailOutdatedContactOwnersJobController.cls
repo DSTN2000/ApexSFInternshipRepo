@@ -3,17 +3,18 @@ public with sharing class EmailOutdatedContactOwnersJobController {
 
     @AuraEnabled(cacheable=false)
     public static Map<String, String> getJobStatus() {
-        CronTrigger job = [
+        List<CronTrigger> jobs = [
             SELECT Id, CronExpression, State, NextFireTime
             FROM CronTrigger
             WHERE CronJobDetail.Name = :JOB_NAME
             LIMIT 1
         ];
 
-        if (job == null) {
+        if (jobs.isEmpty()) {
             return null;
         }
 
+        CronTrigger job = jobs[0];
         return new Map<String, String>{
             'id'           => job.Id,
             'cronExpression' => job.CronExpression,
